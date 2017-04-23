@@ -5,12 +5,18 @@
 
 {
   body: 'string',
-  from: 'string'
+  from: 'string'  //not sent from client
 }
 
-## login
+## login request
 
 {
   login: 'string',
   password: 'string'
+}
+
+## login response
+
+{
+  result: booleans
 }
