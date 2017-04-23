@@ -24,5 +24,11 @@
 ## commands format
 /login user password
 
+# API
+Authenticator {
+  validate(login, password) : Promise<boolean>;
+}
+
 ## think later
 chat refresh on reconnect
+
