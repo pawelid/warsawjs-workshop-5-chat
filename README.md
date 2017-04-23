@@ -27,6 +27,7 @@
 # API
 Authenticator {
   validate(login, password) : Promise<boolean>;
+  register(login, password) : Promise<undefined>;
 }
 
 ## think later
