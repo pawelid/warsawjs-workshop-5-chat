@@ -106,6 +106,14 @@ connection.on('register', function( { result }) {
   }
 });
 
+connection.on('join', function( {login}) {
+  writeLine(`* joined: ${login}`);
+});
+
+connection.on('leave', function( {login}) {
+  writeLine(`* left: ${login}`);
+});
+
 writeLine('commands:');
 writeLine('   /login user password');
 writeLine('   /register user password');

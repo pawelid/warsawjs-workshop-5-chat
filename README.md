@@ -21,6 +21,32 @@
   result: boolean
 }
 
+### register request
+
+{
+  login: 'string',
+  password: 'string'
+}
+
+### register response
+
+{
+  result: boolean
+}
+
+### join
+
+{
+  login: 'string'
+}
+
+### leave
+
+{
+  login: 'string'
+}
+
+
 ## commands format
 /login user password
 
@@ -32,4 +58,5 @@ Authenticator {
 
 ## think later
 chat refresh on reconnect
+join/leave for multiusers
 
