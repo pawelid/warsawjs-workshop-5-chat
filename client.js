@@ -71,3 +71,7 @@ connection.on('login', function( { result }){
     writeLine('! failed to login');
   }
 });
+
+writeLine('commands:');
+writeLine('   /login user password');
+writeLine('');
