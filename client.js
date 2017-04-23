@@ -3,9 +3,6 @@ const util = require('util');
 const connection = require('socket.io-client')('http://localhost:3000');
 const EOL = require('os').EOL;
 
-
-
-
 // ### Input handling ###
 
 function writeLine(line, ...args) {
