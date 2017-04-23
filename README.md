@@ -3,7 +3,7 @@
 This is chat application build during [WarsawJS](https://www.meetup.com/WarsawJS/) [workshop](https://www.meetup.com/WarsawJS/events/238992698/).
 
 ## How to run
-You can run run server and any number of clients using:
+You can run server and any number of clients using:
 
     node server.js
     node client.js
