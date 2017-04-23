@@ -18,5 +18,5 @@
 ## login response
 
 {
-  result: booleans
+  result: boolean
 }
