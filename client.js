@@ -29,7 +29,9 @@ rl.on('line', function(line) {
 })
 
 // ### Message handling ###
-connection.emit('login', {login: 'pawel', password: 'password'});
+connection.emit('login', { 
+  login: 'user-'+ Math.round(Math.random() * 100), 
+  password: 'password'});
 
 connection.on('message', function ( { from, body }) {
   writeLine('server said: %s %s', from, body);
