@@ -29,6 +29,13 @@ const commandHandlers = {
     if(connected){
       sendLogin();
     }
+  },
+
+  register: function handleRegister(login, password) {
+    clientData = {login, password};
+    if(connected) {
+      sendRegister();
+    }
   }
 }
 
@@ -56,6 +63,10 @@ let clientData = null;
 function sendLogin() {
   connection.emit('login', clientData);
 };
+
+function sendRegister() {
+  connection.emit('register', clientData);
+}
 
 // ### Message handling ###
 
@@ -85,6 +96,17 @@ connection.on('login', function( { result }){
   }
 });
 
+connection.on('register', function( { result }) {
+  if(result === true) {
+    rl.setPrompt(`${clientData.login}>`);
+    writeLine('* user registered');
+    sendLogin();
+  } else {
+    writeLine('! failed to register');
+  }
+});
+
 writeLine('commands:');
 writeLine('   /login user password');
+writeLine('   /register user password');
 writeLine('');
