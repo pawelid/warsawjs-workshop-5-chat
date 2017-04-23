@@ -1,21 +1,21 @@
 # warsawjs-workshop-5-chat 
 
-# Format wiadomości
-## message
+## Message format
+### message
 
 {
   body: 'string',
   from: 'string'  //not sent from client
 }
 
-## login request
+### login request
 
 {
   login: 'string',
   password: 'string'
 }
 
-## login response
+### login response
 
 {
   result: boolean

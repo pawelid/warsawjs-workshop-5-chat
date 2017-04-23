@@ -30,6 +30,8 @@ const commandHandlers = {
 
 rl.on('line', function(line) {
 
+  // commands handling
+  
   if(line[0] === '/') {
     const commandParts = line.slice(1).split(' ').filter((part) => part.length > 0);
     const commandName = commandParts[0];
