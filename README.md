@@ -68,6 +68,5 @@ Authenticator {
 }
 
 ## think later
-chat refresh on reconnect
-join/leave for multiconnected users
-
+chat refresh on reconnect  
+join/leave for multiconnected users  
