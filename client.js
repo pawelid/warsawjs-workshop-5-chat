@@ -20,18 +20,34 @@ const rl = readline.createInterface({
 rl.setPrompt('> ');
 rl.prompt();
 
+
+const commandHandlers = {
+  login: function handleLogin(login, password) {
+    clientData = {login, password};
+    sendLogin();
+  }
+}
+
 rl.on('line', function(line) {
-  connection.emit('message', { body: line });
+
+  if(line[0] === '/') {
+    const commandParts = line.slice(1).split(' ').filter((part) => part.length > 0);
+    const commandName = commandParts[0];
+    const commandArgs = commandParts.slice(1);
+    if(commandHandlers[commandName]) {
+      commandHandlers[commandName](commandArgs[0], commandArgs[1]);
+    }    
+  } else {
+    connection.emit('message', { body: line });
+  }
   rl.prompt();
 })
 
 // ### Authentication ###
-let clientData = { 
-  login: 'user-'+ Math.round(Math.random() * 100), 
-  password: 'password'
-};
 
-function login() {
+let clientData = null;
+
+function sendLogin() {
   connection.emit('login', clientData);
 };
 
@@ -40,7 +56,7 @@ function login() {
 connection.on('connect', function() {
   writeLine('* connected');
   if(clientData) {
-    login();
+    sendLogin();
   }
 });
 
@@ -54,5 +70,4 @@ connection.on('login', function( { result }){
   } else {
     writeLine('! failed to login');
   }
-
 });

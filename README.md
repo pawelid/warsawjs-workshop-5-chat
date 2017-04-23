@@ -20,3 +20,9 @@
 {
   result: boolean
 }
+
+## commands format
+/login user password
+
+## think later
+chat refresh on reconnect
