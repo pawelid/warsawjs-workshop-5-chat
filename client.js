@@ -26,4 +26,5 @@ rl.prompt();
 
 rl.on('line', function(line) {
   connection.emit('message', { body: line });
+  rl.prompt();
 })
