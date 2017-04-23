@@ -29,6 +29,7 @@ rl.on('line', function(line) {
 })
 
 // ### Message handling ###
+
 connection.emit('login', { 
   login: 'user-'+ Math.round(Math.random() * 100), 
   password: 'password'});
