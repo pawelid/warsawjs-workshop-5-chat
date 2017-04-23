@@ -30,19 +30,23 @@ rl.on('line', function(line) {
 
 // ### Message handling ###
 
+connection.on('connect', function() {
+  writeLine('* connected')
+});
+
 connection.emit('login', { 
   login: 'user-'+ Math.round(Math.random() * 100), 
   password: 'password'});
 
 connection.on('message', function ( { from, body }) {
-  writeLine('server said: %s %s', from, body);
+  writeLine('%s: %s', from, body);
 });
 
 connection.on('login', function( { result }){
   if (result === true) {
-    writeLine('user logged in');
+    writeLine('* user logged in');
   } else {
-    writeLine('failed to login');
+    writeLine('! failed to login');
   }
 
 });
