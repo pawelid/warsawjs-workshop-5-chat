@@ -1,7 +1,11 @@
-const io = require('socket.io')(3000);
+const fs = require('fs');
+const yaml = require('js-yaml');
+const socketio = require('socket.io');
+const ChatServer = require('./lib/ChatServer');
 
-io.on('connection', function (socket) {
-  socket.on('message', function ({ body }) {
-    io.sockets.emit('message', { body });
-  })
-})
+config = yaml.safeLoad(fs.readFileSync(__dirname + '/config/server.yaml', 'utf8'));
+
+const io = socketio(config.socketPort);
+
+const server = new ChatServer ({ io });
+server.init();
