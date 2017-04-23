@@ -25,15 +25,24 @@ rl.on('line', function(line) {
   rl.prompt();
 })
 
+// ### Authentication ###
+let clientData = { 
+  login: 'user-'+ Math.round(Math.random() * 100), 
+  password: 'password'
+};
+
+function login() {
+  connection.emit('login', clientData);
+};
+
 // ### Message handling ###
 
 connection.on('connect', function() {
-  writeLine('* connected')
+  writeLine('* connected');
+  if(clientData) {
+    login();
+  }
 });
-
-connection.emit('login', { 
-  login: 'user-'+ Math.round(Math.random() * 100), 
-  password: 'password'});
 
 connection.on('message', function ( { from, body }) {
   writeLine('%s: %s', from, body);
