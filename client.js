@@ -4,6 +4,7 @@ const connection = require('socket.io-client')('http://localhost:3000');
 const EOL = require('os').EOL;
 
 let connected = null;
+let clientData = null;
 
 // ### Input handling ###
 
@@ -22,28 +23,10 @@ const rl = readline.createInterface({
 rl.setPrompt('> ');
 rl.prompt();
 
-
-const commandHandlers = {
-  login: function handleLogin(login, password) {
-    clientData = {login, password};
-    if(connected){
-      sendLogin();
-    }
-  },
-
-  register: function handleRegister(login, password) {
-    clientData = {login, password};
-    if(connected) {
-      sendRegister();
-    }
-  }
-}
-
 rl.on('line', function(line) {
 
-  // commands handling
-
   if(line[0] === '/') {
+    // commands handling
     const commandParts = line.slice(1).split(' ').filter((part) => part.length > 0);
     const commandName = commandParts[0];
     const commandArgs = commandParts.slice(1);
@@ -51,22 +34,32 @@ rl.on('line', function(line) {
       commandHandlers[commandName](commandArgs[0], commandArgs[1]);
     }    
   } else {
+    // just normal message
     connection.emit('message', { body: line });
   }
   rl.prompt();
 })
 
-// ### Authentication ###
 
-let clientData = null;
+// ### Command handlers ###
 
-function sendLogin() {
-  connection.emit('login', clientData);
-};
+const commandHandlers = {
 
-function sendRegister() {
-  connection.emit('register', clientData);
+  login: function handleLogin(login, password) {
+    clientData = {login, password};
+    if(connected){
+      connection.emit('login', clientData);
+    }
+  },
+
+  register: function handleRegister(login, password) {
+    clientData = {login, password};
+    if(connected) {
+      connection.emit('register', clientData);
+    }
+  }
 }
+
 
 // ### Message handling ###
 
