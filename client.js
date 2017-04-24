@@ -93,7 +93,7 @@ connection.on('register', function( { result }) {
   if(result === true) {
     rl.setPrompt(`${clientData.login}>`);
     writeLine('* user registered');
-    sendLogin();
+    connection.emit('login', clientData);
   } else {
     writeLine('! failed to register');
   }
